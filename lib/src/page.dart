@@ -45,7 +45,7 @@ class _PDFPageState extends State<PDFPage> {
         child: ZoomableWidget(
             zoomSteps: 10,
             minScale: 1.0,
-            initialScale: 1.3,
+            initialScale: 1.0,
             panLimit: 1,
             maxScale: 12.0,
           child: Image(image: provider),
