@@ -3,10 +3,12 @@ import 'dart:ui';
 import 'package:flutter/widgets.dart';
 import 'package:flutter/painting.dart';
 import 'package:flutter_advanced_networkimage/zoomable.dart';
+import 'package:matrix_gesture_detector/matrix_gesture_detector.dart';
 
 class PDFPage extends StatefulWidget {
   final String imgPath;
   final int num;
+
   PDFPage(this.imgPath, this.num);
 
   @override
@@ -15,6 +17,9 @@ class PDFPage extends StatefulWidget {
 
 class _PDFPageState extends State<PDFPage> {
   ImageProvider provider;
+
+  Matrix4 matrix = Matrix4.identity();
+  Matrix4 zerada = Matrix4.identity();
 
   @override
   void didChangeDependencies() {
@@ -40,15 +45,29 @@ class _PDFPageState extends State<PDFPage> {
 
   @override
   Widget build(BuildContext context) {
-    return SingleChildScrollView(
-        physics: ScrollPhysics(),
-        child: ZoomableWidget(
-            zoomSteps: 10,
-            minScale: 1.0,
-            initialScale: 1.0,
-            panLimit: 1,
-            maxScale: 12.0,
-          child: Image(image: provider),
-        ));
+    return Container(
+        child: Center(
+      child: GestureDetector(
+        onDoubleTap: () {
+          setState(() {
+            matrix = zerada;
+          });
+        },
+        child: MatrixGestureDetector(
+          shouldRotate: false,
+          onMatrixUpdate: (Matrix4 m, Matrix4 tm, Matrix4 sm, Matrix4 rm) {
+            setState(() {
+              matrix = m;
+            });
+          },
+          child: Transform(
+            transform: matrix,
+            child: Image(
+              image: provider,
+            ),
+          ),
+        ),
+      ),
+    ));
   }
 }
