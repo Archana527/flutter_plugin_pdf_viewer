@@ -40,8 +40,8 @@ class _PDFPageState extends State<PDFPage> {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-        decoration: null,
+    return SingleChildScrollView(
+        physics: ScrollPhysics(),
         child: ZoomableWidget(
             zoomSteps: 10,
             minScale: 1.0,
