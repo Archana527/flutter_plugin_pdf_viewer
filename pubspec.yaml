@@ -17,6 +17,8 @@ dependencies:
   flutter_advanced_networkimage: ^0.5.0
   matrix_gesture_detector: ^0.1.0
   gesture_zoom_box: ^0.0.2
+  photo_view: ^0.9.2
+  
 flutter:
   plugin:
     androidPackage: pt.tribeiro.flutter_plugin_pdf_viewer

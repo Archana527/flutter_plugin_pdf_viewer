@@ -2,9 +2,7 @@ import 'dart:io';
 import 'dart:ui';
 import 'package:flutter/widgets.dart';
 import 'package:flutter/painting.dart';
-import 'package:flutter_advanced_networkimage/zoomable.dart';
-import 'package:gesture_zoom_box/gesture_zoom_box.dart';
-import 'package:matrix_gesture_detector/matrix_gesture_detector.dart';
+import 'package:photo_view/photo_view.dart';
 
 class PDFPage extends StatefulWidget {
   final String imgPath;
@@ -47,17 +45,10 @@ class _PDFPageState extends State<PDFPage> {
   @override
   Widget build(BuildContext context) {
     return Container(
-        child: Center(
-            child: Container(
-                child: Center(
-                    child: GestureZoomBox(
-      maxScale: 10.0,
-      doubleTapScale: 1.0,
-      duration: Duration(milliseconds: 200),
-      onPressed: () => Navigator.pop(context),
-      child: Image(
-        image: provider,
+      child: PhotoView.customChild(
+        child: Image(image: provider,),
       ),
-    )))));
+
+    );
   }
 }
