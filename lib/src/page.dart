@@ -1,5 +1,6 @@
 import 'dart:io';
 import 'dart:ui';
+import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter/painting.dart';
 import 'package:photo_view/photo_view.dart';
@@ -16,9 +17,7 @@ class PDFPage extends StatefulWidget {
 
 class _PDFPageState extends State<PDFPage> {
   ImageProvider provider;
-
-  Matrix4 matrix = Matrix4.identity();
-  Matrix4 zerada = Matrix4.identity();
+ 
 
   @override
   void didChangeDependencies() {
@@ -45,8 +44,11 @@ class _PDFPageState extends State<PDFPage> {
   @override
   Widget build(BuildContext context) {
     return Container(
+      color: Colors.white,
       child: PhotoView.customChild(
         child: Image(image: provider,),
+       backgroundDecoration: BoxDecoration(color: Colors.white),
+       minScale: 1.0,
       ),
 
     );
