@@ -3,6 +3,7 @@ import 'dart:ui';
 import 'package:flutter/widgets.dart';
 import 'package:flutter/painting.dart';
 import 'package:flutter_advanced_networkimage/zoomable.dart';
+import 'package:gesture_zoom_box/gesture_zoom_box.dart';
 import 'package:matrix_gesture_detector/matrix_gesture_detector.dart';
 
 class PDFPage extends StatefulWidget {
@@ -47,27 +48,16 @@ class _PDFPageState extends State<PDFPage> {
   Widget build(BuildContext context) {
     return Container(
         child: Center(
-      child: GestureDetector(
-        onDoubleTap: () {
-          setState(() {
-            matrix = zerada;
-          });
-        },
-        child: MatrixGestureDetector(
-          shouldRotate: false,
-          onMatrixUpdate: (Matrix4 m, Matrix4 tm, Matrix4 sm, Matrix4 rm) {
-            setState(() {
-              matrix = m;
-            });
-          },
-          child: Transform(
-            transform: matrix,
-            child: Image(
-              image: provider,
-            ),
-          ),
-        ),
+            child: Container(
+                child: Center(
+                    child: GestureZoomBox(
+      maxScale: 10.0,
+      doubleTapScale: 1.0,
+      duration: Duration(milliseconds: 200),
+      onPressed: () => Navigator.pop(context),
+      child: Image(
+        image: provider,
       ),
-    ));
+    )))));
   }
 }
